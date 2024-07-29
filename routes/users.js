@@ -8,7 +8,7 @@ router.get('/', function(req, res, next) {
 
 
 router.get('/test', function(req, res, next) {
-  res.send('respond with a resource new3');
+  res.send('respond with a resource new4');
 });
 
 module.exports = router;
