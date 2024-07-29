@@ -50,13 +50,16 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: node-app
-          
+
+      - name: Unzip artifact for deployment
+        run: unzip release.zip
+      
       - name: Login to Azure
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_486B90E67B484C7DB54C0C99FC269D73 }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_59F263FFB1FD43A58C49B25D6DF85CFD }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_6CDA8DC8067D4ABE97A1C6C8E8670FD2 }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_7F8C3AA4C6DD4FF3B692C9A01B8460E8 }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_0AC3E605109945A5B938BC2373ABC2FC }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_1D89A3CB6F3947C48EE9D8C3EBF3C81A }}
 
       - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp
