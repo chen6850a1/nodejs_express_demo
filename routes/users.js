@@ -29,15 +29,19 @@ router.get('/test', function(req, res, next) {
     port: process.env.AZURE_MYSQL_PORT
   });
 
+  let log="";
   connection.connect((err) => {
-    let log="";
       if (err) {
         log="mysql error";
+        console.log(log)
+        res.send('respond with a resource new6 '+log);
       }else{
-        log="mysql success"
+        log="mysql success";
+        console.log(log);
+        res.send('respond with a resource new6 '+log);
       }
   });
-  res.send('respond with a resource new6 '+log);
+  
 });
 
 module.exports = router;
