@@ -36,7 +36,7 @@ router.get('/test', function(req, res, next) {
     }
     res.send('Connected to MySQL database');
   });
-  res.send('respond with a resource new5');
+  //res.send('respond with a resource new5');
 });
 
 module.exports = router;
