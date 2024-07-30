@@ -32,12 +32,12 @@ router.get('/test', function(req, res, next) {
 
   connection.connect((err) => {
     if (err) {
-      console.error('Error connecting to MySQL database: ' + err.stack);
+      res.send('Error connecting to MySQL database: ' + err.stack);
       return;
     }
-    console.log('Connected to MySQL database');
+    res.send('Connected to MySQL database');
   });
-  res.send('respond with a resource new4');
+  res.send('respond with a resource new5');
 });
 
 module.exports = router;
