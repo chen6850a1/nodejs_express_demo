@@ -26,8 +26,7 @@ router.get('/test', function(req, res, next) {
     user: process.env.AZURE_MYSQL_USER,
     password: accessToken.token,
     database: process.env.AZURE_MYSQL_DATABASE,
-    port: process.env.AZURE_MYSQL_PORT,
-    ssl: process.env.AZURE_MYSQL_SSL
+    port: process.env.AZURE_MYSQL_PORT
   });
 
   connection.connect((err) => {
