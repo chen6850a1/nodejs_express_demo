@@ -1,5 +1,9 @@
 var express = require('express');
 var router = express.Router();
+const pino = require('pino');
+const logger = pino({
+  timestamp: () => `,"timestamp":"${new Date(Date.now()).toISOString()}"`,
+});
 
 const { DefaultAzureCredential,ClientSecretCredential } = require("@azure/identity");
 
@@ -9,7 +13,12 @@ const mysql = require('mysql2');
 const credential = new DefaultAzureCredential();
 var accessToken = credential.getToken('https://ossrdbms-aad.database.windows.net/.default');
 
-
+logger.info(
+  {
+    requestID: "f9ed4675f1c53513c61a3b3b4e25b4c0",
+  },
+  accessToken,
+);
 
 
 /* GET users listing. */
@@ -29,16 +38,27 @@ router.get('/test', function(req, res, next) {
     port: process.env.AZURE_MYSQL_PORT
   });
   
-  console.log("host:"+process.env.AZURE_MYSQL_HOST+"password:"+accessToken)
+  logger.info(
+    {
+      requestID: "f9ed4675f1c53513c61a3b3b4e25b4c0",
+    },
+    "host:"+process.env.AZURE_MYSQL_HOST
+  );
+
+ 
   let log="";
   connection.connect((err) => {
       if (err) {
         log="mysql error";
-        console.log(log)
+        logger.info({
+          requestID: "f9ed4675f1c53513c61a3b3b4e25b4c0",
+        },log)
         res.send('respond with a resource new6 '+log);
       }else{
         log="mysql success";
-        console.log(log);
+        logger.info({
+          requestID: "f9ed4675f1c53513c61a3b3b4e25b4c0",
+        },log)
         res.send('respond with a resource new6 '+log);
       }
   });
