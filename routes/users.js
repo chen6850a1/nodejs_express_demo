@@ -32,15 +32,20 @@ router.get('/test', async (req, res, next)=>{
     user: process.env.AZURE_MYSQL_USER,
     password: accessToken.token,
     database: process.env.AZURE_MYSQL_DATABASE,
-    port: process.env.AZURE_MYSQL_PORT,
-    ssl: process.env.AZURE_MYSQL_SSL
+    port: process.env.AZURE_MYSQL_PORT
   });
   
   logger.info(
     {
       requestID: "f9ed4675f1c53513c61a3b3b4e25b4c0",
     },
-    "host:"+process.env.AZURE_MYSQL_HOST
+    {
+      host: process.env.AZURE_MYSQL_HOST,
+      user: process.env.AZURE_MYSQL_USER,
+      password: accessToken.token,
+      database: process.env.AZURE_MYSQL_DATABASE,
+      port: process.env.AZURE_MYSQL_PORT
+    }
   );
 
  
@@ -50,7 +55,7 @@ router.get('/test', async (req, res, next)=>{
         log="mysql error";
         logger.info({
           requestID: "f9ed4675f1c53513c61a3b3b4e25b4c0",
-        },log)
+        },err)
         res.send('respond with a resource new6 '+log);
       }else{
         log="mysql success";
