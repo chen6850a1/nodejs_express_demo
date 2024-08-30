@@ -10,8 +10,13 @@ const { DefaultAzureCredential,ClientSecretCredential } = require("@azure/identi
 const mysql = require('mysql2');
 
 
-const credential = new DefaultAzureCredential();
-var accessToken = credential.getToken('https://ossrdbms-aad.database.windows.net/.default');
+
+const clientId = process.env.AZURE_MYSQL_CLIENTID;
+const credential = new DefaultAzureCredential({
+   managedIdentityClientId: clientId
+});
+
+var accessToken = await credential.getToken('https://ossrdbms-aad.database.windows.net/.default');
 
 logger.info(
   {
