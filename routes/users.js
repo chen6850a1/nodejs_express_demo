@@ -28,13 +28,15 @@ router.get('/test', async (req, res, next)=>{
     },
     accessToken,
   );
+
+
   const connection = mysql.createConnection({
     host: process.env.AZURE_MYSQL_HOST,
     user: process.env.AZURE_MYSQL_USER,
     password: accessToken.token,
     database: process.env.AZURE_MYSQL_DATABASE,
     port: process.env.AZURE_MYSQL_PORT,
-    ssl:{ca: fs.readFileSync('/var/www/html/DigiCertGlobalRootCA.crt.pem')}
+    ssl:{ca: fs.readFileSync('./DigiCertGlobalRootCA.crt.pem')}
   });
   
   logger.info(
@@ -47,7 +49,7 @@ router.get('/test', async (req, res, next)=>{
       password: accessToken.token,
       database: process.env.AZURE_MYSQL_DATABASE,
       port: process.env.AZURE_MYSQL_PORT,
-      ssl:""
+      ssl:{ca: fs.readFileSync('./DigiCertGlobalRootCA.crt.pem')}
     }
   );
 
