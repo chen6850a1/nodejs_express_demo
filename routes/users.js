@@ -8,6 +8,7 @@ const logger = pino({
 const { DefaultAzureCredential,ClientSecretCredential } = require("@azure/identity");
 
 const mysql = require('mysql2');
+var fs = require("fs");
 
 
 
