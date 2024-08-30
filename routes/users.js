@@ -32,7 +32,8 @@ router.get('/test', async (req, res, next)=>{
     user: process.env.AZURE_MYSQL_USER,
     password: accessToken.token,
     database: process.env.AZURE_MYSQL_DATABASE,
-    port: process.env.AZURE_MYSQL_PORT
+    port: process.env.AZURE_MYSQL_PORT,
+    ssl: process.env.AZURE_MYSQL_SSL
   });
   
   logger.info(
