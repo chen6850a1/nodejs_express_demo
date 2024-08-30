@@ -11,20 +11,6 @@ const mysql = require('mysql2');
 
 
 
-const clientId = process.env.AZURE_MYSQL_CLIENTID;
-const credential = new DefaultAzureCredential({
-   managedIdentityClientId: clientId
-});
-
-var accessToken = await credential.getToken('https://ossrdbms-aad.database.windows.net/.default');
-
-logger.info(
-  {
-    requestID: "f9ed4675f1c53513c61a3b3b4e25b4c0",
-  },
-  accessToken,
-);
-
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -32,9 +18,15 @@ router.get('/', function(req, res, next) {
 });
 
 
-router.get('/test', function(req, res, next) {
-  
-  
+router.get('/test', async (req, res, next)=>{
+  const credential = new DefaultAzureCredential();
+  var accessToken = await credential.getToken('https://ossrdbms-aad.database.windows.net/.default');
+  logger.info(
+    {
+      requestID: "f9ed4675f1c53513c61a3b3b4e25b4c0",
+    },
+    accessToken,
+  );
   const connection = mysql.createConnection({
     host: process.env.AZURE_MYSQL_HOST,
     user: process.env.AZURE_MYSQL_USER,
